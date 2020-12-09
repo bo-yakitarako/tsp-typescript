@@ -4,9 +4,10 @@
     "description": "TypeScriptで作る巡回セールスマン問題",
     "main": "build/index.js",
     "scripts": {
-        "start": "node ./build/index.js",
+        "launch": "node ./build/index.js",
+        "start": "yarn build && yarn launch",
         "debug": "ts-node ./src/index.ts",
-        "compile": "tsc -p .",
+        "build": "tsc -p .",
         "compile:test": "tsc -p . --noEmit",
         "lint": "eslint --ext .ts --ignore-path .gitignore .",
         "lint:fix": "eslint --ext .ts --ignore-path .gitignore . --fix",
