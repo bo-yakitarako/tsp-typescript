@@ -36,6 +36,7 @@
         "complexity": ["error", 11],
         "camelcase": "off",
         "class-methods-use-this": "off",
+        "lines-between-class-members": "off",
         "no-console": "off",
         "@typescript-eslint/no-unused-vars": "error",
         "@typescript-eslint/naming-convention": [
