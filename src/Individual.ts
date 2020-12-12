@@ -1,6 +1,6 @@
 import Population from './Population';
 
-const MUTATION_RATE = 0.01;
+const MUTATION_RATE = 0.03;
 
 export default class Individual {
   private fieldChromosome: number[];
@@ -53,14 +53,18 @@ export default class Individual {
   }
 
   private spontaneousMutation(): void {
-    const index1 = Math.floor(this.fieldChromosome.length * Math.random());
-    let index2 = index1;
-    while (index2 === index1) {
-      index2 = Math.floor(this.fieldChromosome.length * Math.random());
+    const a = Math.floor(this.fieldChromosome.length * Math.random());
+    let b = a;
+    while (b === a) {
+      b = Math.floor(this.fieldChromosome.length * Math.random());
     }
-    const tmp = this.fieldChromosome[index1];
-    this.fieldChromosome[index1] = this.fieldChromosome[index2];
-    this.fieldChromosome[index2] = tmp;
+    const index1 = a < b ? a : b;
+    const index2 = a < b ? b : a;
+    this.fieldChromosome = [
+      ...this.fieldChromosome.slice(0, index1),
+      ...this.fieldChromosome.slice(index1, index2 + 1).reverse(),
+      ...this.fieldChromosome.slice(index2 + 1, this.fieldChromosome.length),
+    ];
   }
 
   private calcScore(): number {
