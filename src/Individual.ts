@@ -1,9 +1,10 @@
-const MUTATION_RATE = 0.03;
+import Population from './Population';
+
+const MUTATION_RATE = 0.01;
 
 export default class Individual {
   private fieldChromosome: number[];
   private fieldScore: number;
-  public static nodes: [number, number][];
 
   constructor(...parents: [Individual, Individual, number] | []) {
     this.fieldChromosome = [];
@@ -11,8 +12,7 @@ export default class Individual {
       this.setRandomGenes();
       this.fieldScore = this.calcScore();
     } else {
-      const [mother, father, division] = parents;
-      this.orderCrossover(mother, father, division);
+      this.orderCrossover(...parents);
       if (Math.random() < MUTATION_RATE) {
         this.spontaneousMutation();
       }
@@ -29,7 +29,7 @@ export default class Individual {
   }
 
   private setRandomGenes(): void {
-    let genes = Individual.nodes.map((val, index) => index);
+    let genes = Population.nodes.map((val, index) => index);
     while (genes.length > 0) {
       const r = Math.floor(genes.length * Math.random());
       this.fieldChromosome.push(genes[r]);
@@ -71,8 +71,8 @@ export default class Individual {
   }
 
   private static calcDistance(gene1: number, gene2: number) {
-    const [x1, y1] = Individual.nodes[gene1];
-    const [x2, y2] = Individual.nodes[gene2];
+    const [x1, y1] = Population.nodes[gene1];
+    const [x2, y2] = Population.nodes[gene2];
     const x = x1 - x2;
     const y = y1 - y2;
     return Math.sqrt(x * x + y * y);
