@@ -27,6 +27,7 @@ Individual {
     21, 24, 13, 1, 9, 28, 11, 
 ]
 経路長: 201.661
+./index  21.41s user 16.69s system 98% cpu 38.570 total
 ```
 
 ...
